@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo Digital | Creaciones</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --rosa-fondo: #fff5f7;
+      --rosa-tarjeta: #ffffff;
+      --rosa-pastel-suave: #fce4ec;
+      --rosa-pastel-medio: #f8bbd0;
+      --rosa-acento: #e91e63;
+      --rosa-texto: #880e4f;
+      --texto-oscuro: #4a3e3d;
+      --texto-suave: #7a6b69;
+      --sombra-suave: 0 10px 25px rgba(233, 30, 99, 0.08);
+      --sombra-hover: 0 15px 30px rgba(233, 30, 99, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--rosa-fondo);
+      background-image: radial-gradient(#f8bbd0 0.8px, transparent 0.8px), radial-gradient(#f8bbd0 0.8px, var(--rosa-fondo) 0.8px);
+      background-size: 32px 32px;
+      background-position: 0 0, 16px 16px;
+      color: var(--texto-oscuro);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .portada {
+      text-align: center;
+      padding: 50px 20px 40px;
+      background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+      border-bottom: 4px solid #f48fb1;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .marco-logo {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 15px;
+      border-radius: 50%;
+      background-color: #fff;
+      padding: 6px;
+      box-shadow: var(--sombra-suave);
+    }
+
+    .logo {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .portada h1 {
+      font-size: 2.2rem;
+      color: var(--rosa-texto);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .portada .subtitulo {
+      font-size: 1.05rem;
+      color: var(--texto-suave);
+      font-weight: 500;
+    }
+
+    .etiqueta-exhibicion {
+      display: inline-block;
+      margin-top: 12px;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: var(--rosa-texto);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .contenedor {
+      max-width: 1100px;
+      width: 90%;
+      margin: 40px auto;
+      flex: 1;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 25px;
+    }
+
+    .tarjeta-menu {
+      background: var(--rosa-tarjeta);
+      border-radius: 24px;
+      padding: 30px 20px;
+      text-align: center;
+      border: 2px solid var(--rosa-pastel-suave);
+      box-shadow: var(--sombra-suave);
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tarjeta-menu::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, #f8bbd0, #e91e63);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .tarjeta-menu:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--sombra-hover);
+      border-color: var(--rosa-pastel-medio);
+    }
+
+    .tarjeta-menu:hover::before {
+      opacity: 1;
+    }
+
+    .icono-categoria {
+      font-size: 3rem;
+      margin-bottom: 12px;
+      display: inline-block;
+      transition: transform 0.3s;
+    }
+
+    .tarjeta-menu:hover .icono-categoria {
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    .tarjeta-menu h3 {
+      font-size: 1.2rem;
+      color: var(--rosa-texto);
+      margin-bottom: 8px;
+    }
+
+    .tarjeta-menu p {
+      font-size: 0.88rem;
+      color: var(--texto-suave);
+      line-height: 1.4;
+    }
+
+    .btn-explorar {
+      display: inline-block;
+      margin-top: 15px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--rosa-acento);
+    }
+
+    .seccion-catalogo {
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    .barra-superior-seccion {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .btn-volver {
+      background-color: #ffffff;
+      color: var(--rosa-texto);
+      border: 2px solid var(--rosa-pastel-medio);
+      padding: 10px 22px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: var(--sombra-suave);
+      transition: all 0.25s;
+    }
+
+    .btn-volver:hover {
+      background-color: var(--rosa-pastel-suave);
+      transform: translateX(-4px);
+    }
+
+    .titulo-seccion {
+      font-size: 1.6rem;
+      color: var(--rosa-texto);
+    }
+
+    .galeria-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 25px;
+    }
+
+    .tarjeta-producto {
+      background-color: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--rosa-pastel-suave);
+      box-shadow: var(--sombra-suave);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .tarjeta-producto:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--sombra-hover);
+    }
+
+    .contenedor-foto {
+      width: 100%;
+      height: 220px;
+      background-color: #fce4ec;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contenedor-foto img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .tarjeta-producto:hover .contenedor-foto img {
+      transform: scale(1.06);
+    }
+
+    .info-producto {
+      padding: 18px 15px;
+      text-align: center;
+    }
+
+    .info-producto h3 {
+      font-size: 1rem;
+      color: var(--texto-oscuro);
+      margin-bottom: 6px;
+    }
+
+    .info-producto p {
+      font-size: 0.85rem;
+      color: var(--texto-suave);
+      line-height: 1.3;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(180deg, #ffffff 0%, var(--rosa-pastel-suave) 100%);
+      border-top: 2px solid var(--rosa-pastel-medio);
+      margin-top: 50px;
+    }
+
+    footer h4 {
+      color: var(--rosa-texto);
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+    }
+
+    footer .texto-footer {
+      font-size: 0.9rem;
+      color: var(--texto-suave);
+      margin-bottom: 25px;
+    }
+
+    .contenedor-contacto {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .item-contacto {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background-color: #ffffff;
+      padding: 12px 22px;
+      border-radius: 30px;
+      border: 1.5px solid var(--rosa-pastel-medio);
+      color: var(--rosa-texto);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: var(--sombra-suave);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .item-contacto:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--sombra-hover);
+      background-color: var(--rosa-fondo);
+    }
+
+    .btn-whatsapp-footer {
+      background-color: #25d366;
+      color: #ffffff;
+      border: none;
+    }
+
+    .btn-whatsapp-footer:hover {
+      background-color: #20bd5a;
+    }
+
+    .notificacion-copiado {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: var(--rosa-texto);
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: var(--sombra-hover);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .notificacion-copiado.activa {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(-5px);
+    }
+
+    .seccion-oculta {
+      display: none !important;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .portada { padding: 35px 15px 30px; }
+      .portada h1 { font-size: 1.75rem; }
+      .marco-logo { width: 110px; height: 110px; }
+      .contenedor { margin: 25px auto; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .galeria-grid { grid-template-columns: 1fr; }
+      .contenedor-contacto { flex-direction: column; width: 100%; }
+      .item-contacto { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PORTADA -->
+  <header class="portada">
+    <div class="marco-logo">
+      <img src="img/logo.png" alt="Logo" class="logo">
+    </div>
+    <h1>Creaciones</h1>
+    <p class="subtitulo">Galería de Trabajos y Creaciones Únicas</p>
+    <span class="etiqueta-exhibicion">🌸 Vitrina de Diseños 🌸</span>
+  </header>
+
+  <main class="contenedor">
+
+    <!-- MENÚ PRINCIPAL CON 7 CATEGORÍAS SEPARADAS -->
+    <div id="vista-menu" class="menu-grid">
+      <div class="tarjeta-menu" onclick="mostrarSeccion('rosas')">
+        <span class="icono-categoria">🌹</span>
+        <h3>Rosas Eternas</h3>
+        <p>Ramos y arreglos especiales en cinta satinada hechos para durar.</p>
+        <span class="btn-explorar">Ver Galería →</span>
+      </div>
+
+      <div class="tarjeta-menu" onclick="mostrarSeccion('libros')">
+        <span class="icono-categoria">📚</span>
+        <h3>Libros</h3>
+        <p>Libros de recuerdos, recetarios y empastados hechos a mano.</p>
+        <span class="btn-explorar">Ver Galería →</span>
+      </div>
+
+      <div class="tarjeta-menu" onclick="mostrarSeccion('agendas')">
+        <span class="icono-categoria">🗓️</span>
+        <h3>Agendas</h3>
+        <p>Agendas, planners y libretas personalizadas artesanalmente.</p>
+        <span class="btn-explorar">Ver Galería →</span>
+      </div>
+
+      <div class="tarjeta-menu" onclick="mostrarSeccion('cuadros')">
+        <span class="icono-categoria">🖼️</span>
+        <h3>Cuadros</h3>
+        <p>Cuadros decorativos, marcos 3D y arreglos especiales para pared.</p>
+        <span class="btn-explorar">Ver Galería →</span>
+      </div>
+
+      <div class="tarjeta-menu" onclick="mostrarSeccion('fotos')">
+        <span class="icono-categoria">📷</span>
+        <h3>Fotos</h3>
+        <p>Impresiones de alta calidad, fotos estilo polaroide y portafotos.</p>
+        <span class="btn-explorar">Ver Galería →</span>
+      </div>
+
+      <div class="tarjeta-menu" onclick="mostrarSeccion('stickers-llaveros')">
+        <span class="icono-categoria">✨</span>
+        <h3>Stickers y Llaveros</h3>
+        <p>Detalles únicos en stickers impresos y llaveros a medida.</p>
+        <span class="btn-explorar">Ver Galería →</span>
+      </div>
+
+      <div class="tarjeta-menu" onclick="mostrarSeccion('manualidades')">
+        <span class="icono-categoria">🎨</span>
+        <h3>Manualidades Variadas</h3>
+        <p>Proyectos especiales, decoraciones y creaciones por encargo.</p>
+        <span class="btn-explorar">Ver Galería →</span>
+      </div>
+    </div>
+
+    <!-- ROSAS ETERNAS (10 FOTOS) -->
+    <section id="rosas" class="seccion-catalogo seccion-oculta">
+      <div class="barra-superior-seccion">
+        <button class="btn-volver" onclick="mostrarMenuPrincipal()">← Volver al Menú</button>
+        <h2 class="titulo-seccion">🌹 Rosas Eternas</h2>
+      </div>
+      <div class="galeria-grid">
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/rosa1.jpg" alt="Rosas"></div><div class="info-producto"><h3>Ramo Rosa Pastel</h3><p>Rosas satinadas hechas a mano.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/rosa2.jpg" alt="Rosas"></div><div class="info-producto"><h3>Ramo Rojo Clásico</h3><p>Detalles en cinta de alta calidad.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/rosa3.jpg" alt="Rosas"></div><div class="info-producto"><h3>Cúpula con Rosa</h3><p>Estilo flor eterna protegida.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/rosa4.jpg" alt="Rosas"></div><div class="info-producto"><h3>Arreglo Mixto</h3><p>Combinación de tonos suaves.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/rosa5.jpg" alt="Rosas"></div><div class="info-producto"><h3>Ramo Azul Real</h3><p>Diseño brillante personalizado.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/rosa6.jpg" alt="Rosas"></div><div class="info-producto"><h3>Rosas con Luces LED</h3><p>Detalle luminoso para regalo.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/rosa7.jpg" alt="Rosas"></div><div class="info-producto"><h3>Caja Corazón</h3><p>Arreglo floral en caja especial.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/rosa8.jpg" alt="Rosas"></div><div class="info-producto"><h3>Ramo Blanco Puro</h3><p>Elegancia en listón de seda.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/rosa9.jpg" alt="Rosas"></div><div class="info-producto"><h3>Mini Ramo Individual</h3><p>Un detalle delicado y único.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/rosa10.jpg" alt="Rosas"></div><div class="info-producto"><h3>Ramo Gigante</h3><p>Creación de gran tamaño hecha a pedido.</p></div></div>
+      </div>
+    </section>
+
+    <!-- LIBROS (10 FOTOS) -->
+    <section id="libros" class="seccion-catalogo seccion-oculta">
+      <div class="barra-superior-seccion">
+        <button class="btn-volver" onclick="mostrarMenuPrincipal()">← Volver al Menú</button>
+        <h2 class="titulo-seccion">📚 Libros</h2>
+      </div>
+      <div class="galeria-grid">
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/libro1.jpg" alt="Libro"></div><div class="info-producto"><h3>Libro de Recuerdos</h3><p>Álbum empastado para fotos y notas.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/libro2.jpg" alt="Libro"></div><div class="info-producto"><h3>Recetario Artesanal</h3><p>Diseño especial para la cocina.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/libro3.jpg" alt="Libro"></div><div class="info-producto"><h3>Libro de Firmas</h3><p>Ideal para eventos y bodas.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/libro4.jpg" alt="Libro"></div><div class="info-producto"><h3>Cuaderno de Bocetos</h3><p>Hojas de alto gramaje para dibujo.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/libro5.jpg" alt="Libro"></div><div class="info-producto"><h3>Diario Personal con Broche</h3><p>Cubierta rígida hecha a mano.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/libro6.jpg" alt="Libro"></div><div class="info-producto"><h3>Libro de Bebé</h3><p>Para registrar momentos especiales.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/libro7.jpg" alt="Libro"></div><div class="info-producto"><h3>Libro de Agradecimientos</h3><p>Tapa dura personalizada.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/libro8.jpg" alt="Libro"></div><div class="info-producto"><h3>Libro Temático Vintage</h3><p>Estilo antiguo empastado en tela.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/libro9.jpg" alt="Libro"></div><div class="info-producto"><h3>Álbum Fotográfico Ilustrado</h3><p>Hojas gruesas para montar recuerdos.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/libro10.jpg" alt="Libro"></div><div class="info-producto"><h3>Bitácora de Viajes</h3><p>Diseño compacto con mapa.</p></div></div>
+      </div>
+    </section>
+
+    <!-- AGENDAS (10 FOTOS) -->
+    <section id="agendas" class="seccion-catalogo seccion-oculta">
+      <div class="barra-superior-seccion">
+        <button class="btn-volver" onclick="mostrarMenuPrincipal()">← Volver al Menú</button>
+        <h2 class="titulo-seccion">🗓️ Agendas</h2>
+      </div>
+      <div class="galeria-grid">
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/agenda1.jpg" alt="Agenda"></div><div class="info-producto"><h3>Agenda Floral</h3><p>Empastado artesanal con flores.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/agenda2.jpg" alt="Agenda"></div><div class="info-producto"><h3>Libreta de Apuntes</h3><p>Hojas decoradas hechas a mano.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/agenda3.jpg" alt="Agenda"></div><div class="info-producto"><h3>Planner Semanal</h3><p>Organizador en tapa dura.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/agenda4.jpg" alt="Agenda"></div><div class="info-producto"><h3>Agenda Ejecutiva</h3><p>Acabados elegantes y delicados.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/agenda5.jpg" alt="Agenda"></div><div class="info-producto"><h3>Libreta Pocket</h3><p>Tamaño compacto para el bolso.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/agenda6.jpg" alt="Agenda"></div><div class="info-producto"><h3>Agenda Tema Ilustrado</h3><p>Tapa personalizada a pedido.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/agenda7.jpg" alt="Agenda"></div><div class="info-producto"><h3>Planner Mensual Docente</h3><p>Formato especial de organización.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/agenda8.jpg" alt="Agenda"></div><div class="info-producto"><h3>Agenda Perpetua</h3><p>Sin fechas fijas para usar cuando quieras.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/agenda9.jpg" alt="Agenda"></div><div class="info-producto"><h3>Planner de Finanzas</h3><p>Secciones para control de gastos.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/agenda10.jpg" alt="Agenda"></div><div class="info-producto"><h3>Agenda Minimalista Rosa</h3><p>Diseño limpio y portada suave.</p></div></div>
+      </div>
+    </section>
+
+    <!-- CUADROS (10 FOTOS) -->
+    <section id="cuadros" class="seccion-catalogo seccion-oculta">
+      <div class="barra-superior-seccion">
+        <button class="btn-volver" onclick="mostrarMenuPrincipal()">← Volver al Menú</button>
+        <h2 class="titulo-seccion">🖼️ Cuadros</h2>
+      </div>
+      <div class="galeria-grid">
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/cuadro1.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Cuadro Familiar</h3><p>Foto impresa en alta calidad con marco.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/cuadro2.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Marco con Luces</h3><p>Cuadro decorado con tira LED.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/cuadro3.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Cuadro 3D</h3><p>Efecto de profundidad con capas.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/cuadro4.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Cuadro Frase Motivacional</h3><p>Tipografía elegante impresa.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/cuadro5.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Set de Mini Cuadros</h3><p>Trío de marquitos combinados.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/cuadro6.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Cuadro con Flores Secas</h3><p>Decoración mixta foto y naturaleza.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/cuadro7.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Cuadro Sombra Infantil</h3><p>Diseño con volumen para habitación.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/cuadro8.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Cuadro con Canción y Código</h3><p>Estilo reproductor musical.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/cuadro9.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Marco Rustico Madera</h3><p>Acabado natural para decoración.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/cuadro10.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Cuadro Pareja Aniversario</h3><p>Diseño con fechas especiales.</p></div></div>
+      </div>
+    </section>
+
+    <!-- FOTOS (10 FOTOS) -->
+    <section id="fotos" class="seccion-catalogo seccion-oculta">
+      <div class="barra-superior-seccion">
+        <button class="btn-volver" onclick="mostrarMenuPrincipal()">← Volver al Menú</button>
+        <h2 class="titulo-seccion">📷 Fotos</h2>
+      </div>
+      <div class="galeria-grid">
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/foto1.jpg" alt="Fotos"></div><div class="info-producto"><h3>Foto Polaroide Gigante</h3><p>Estilo retro con mensaje impreso.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/foto2.jpg" alt="Fotos"></div><div class="info-producto"><h3>Collage de Fotos</h3><p>Mosaico de recuerdos especiales.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/foto3.jpg" alt="Fotos"></div><div class="info-producto"><h3>Retrato Personalizado</h3><p>Acabado mate de alta definición.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/foto4.jpg" alt="Fotos"></div><div class="info-producto"><h3>Portafoto de Mesa</h3><p>Marco de escritorio hecho a mano.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/foto5.jpg" alt="Fotos"></div><div class="info-producto"><h3>Tira de Fotos Tipo Cabina</h3><p>Set de fotos verticales con fondo.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/foto6.jpg" alt="Fotos"></div><div class="info-producto"><h3>Mini Fotos Magneticas</h3><p>Ideales para el refrigerador.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/foto7.jpg" alt="Fotos"></div><div class="info-producto"><h3>Foto en Bloque Acrílico</h3><p>Efecto cristal brillante.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/foto8.jpg" alt="Fotos"></div><div class="info-producto"><h3>Caja con Galería de Fotos</h3><p>Fotos desplegables sorpresa.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/foto9.jpg" alt="Fotos"></div><div class="info-producto"><h3>Guirnalda con Fotos</h3><p>Fotos impresas con broches de madera.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/foto10.jpg" alt="Fotos"></div><div class="info-producto"><h3>Foto Impresa con Filtro Suave</h3><p>Acabado pastel especial.</p></div></div>
+      </div>
+    </section>
+
+    <!-- STICKERS Y LLAVEROS (10 FOTOS) -->
+    <section id="stickers-llaveros" class="seccion-catalogo seccion-oculta">
+      <div class="barra-superior-seccion">
+        <button class="btn-volver" onclick="mostrarMenuPrincipal()">← Volver al Menú</button>
+        <h2 class="titulo-seccion">✨ Stickers y Llaveros</h2>
+      </div>
+      <div class="galeria-grid">
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/sticker1.jpg" alt="Stickers"></div><div class="info-producto"><h3>Pack Stickers Florales</h3><p>Vinilo resistente al agua.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/sticker2.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero en Resina</h3><p>Con inicial y detalles dorados.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/sticker3.jpg" alt="Stickers"></div><div class="info-producto"><h3>Stickers Holográficos</h3><p>Brillo y reflejos de colores.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/sticker4.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero de Tela / Cinta</h3><p>Confección suave con dije.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/sticker5.jpg" alt="Stickers"></div><div class="info-producto"><h3>Pack Frases Bonitas</h3><p>Ideales para cuadernos y termos.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/sticker6.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero Personalizado Foto</h3><p>Imagen miniaturizada protegida.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/sticker7.jpg" alt="Stickers"></div><div class="info-producto"><h3>Stickers Ilustrados</h3><p>Dibujos exclusivos impresos.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/sticker8.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero Parejas</h3><p>Duo de llaveros complementarios.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/sticker9.jpg" alt="Stickers"></div><div class="info-producto"><h3>Set de Mini Stickers</h3><p>Variedad de tamaños pequeñitos.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/sticker10.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero Tejido</h3><p>Detalle a crochet o macramé.</p></div></div>
+      </div>
+    </section>
+
+    <!-- MANUALIDADES VARIADAS (10 FOTOS) -->
+    <section id="manualidades" class="seccion-catalogo seccion-oculta">
+      <div class="barra-superior-seccion">
+        <button class="btn-volver" onclick="mostrarMenuPrincipal()">← Volver al Menú</button>
+        <h2 class="titulo-seccion">🎨 Manualidades Variadas</h2>
+      </div>
+      <div class="galeria-grid">
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/manualidad1.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Caja Sorpresa</h3><p>Caja desplegable con recuerdos.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/manualidad2.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Adorno Colgante</h3><p>Decoración para pared o puerta.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/manualidad3.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Tarjeta 3D Pop-up</h3><p>Tarjeta desplegable hecha a mano.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/manualidad4.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Detalle de Mesa</h3><p>Centro de mesa decorativo.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/manualidad5.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Bolsa de Regalo Pintada</h3><p>Diseño exclusivo pintado a mano.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/manualidad6.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Arreglo Dulce</h3><p>Decoración especial para festejos.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/manualidad7.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Portavelas Artesanal</h3><p>Detalle cálido para el hogar.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/manualidad8.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Topper para Pastel</h3><p>Decoración personalizada para tortas.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/manualidad9.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Banderines Temáticos</h3><p>Decoración en papel y tela.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/manualidad10.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Recuerdo Evento Especial</h3><p>Detalles hechos en lote a pedido.</p></div></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer>
+    <h4>¿Quieres contactarte con nosotros?</h4>
+    <p class="texto-footer">Escríbenos directamente o copia nuestro correo para cualquier consulta.</p>
+
+    <div class="contenedor-contacto">
+      <!-- REEMPLAZA EL NÚMERO Y CORREO -->
+      <a href="https://wa.me/56900000000?text=¡Hola!%20Vi%20tu%20catálogo%20web%20y%20me%20gustaron%20tus%20creaciones." target="_blank" class="item-contacto btn-whatsapp-footer">
+        💬 WhatsApp Directo
+      </a>
+      <div class="item-contacto" onclick="copiarCorreo('correo@ejemplo.com')">
+        ✉️ <span id="texto-correo">correo@ejemplo.com</span>
+      </div>
+    </div>
+  </footer>
+
+  <div id="notificacion" class="notificacion-copiado">¡Correo copiado al portapapeles! 📋</div>
+
+  <script>
+    function mostrarSeccion(idSeccion) {
+      document.getElementById('vista-menu').classList.add('seccion-oculta');
+      const secciones = document.querySelectorAll('.seccion-catalogo');
+      secciones.forEach(sec => sec.classList.add('seccion-oculta'));
+
+      const seccionElegida = document.getElementById(idSeccion);
+      if (seccionElegida) {
+        seccionElegida.classList.remove('seccion-oculta');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function mostrarMenuPrincipal() {
+      const secciones = document.querySelectorAll('.seccion-catalogo');
+      secciones.forEach(sec => sec.classList.add('seccion-oculta'));
+      document.getElementById('vista-menu').classList.remove('seccion-oculta');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function copiarCorreo(correo) {
+      navigator.clipboard.writeText(correo).then(() => {
+        const notif = document.getElementById('notificacion');
+        notif.classList.add('activa');
+        setTimeout(() => {
+          notif.classList.remove('activa');
+        }, 2500);
+      });
+    }
+  </script>
+</body>
+</html>
