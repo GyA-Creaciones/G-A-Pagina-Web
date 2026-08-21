@@ -231,6 +231,7 @@
       background-color: #fce4ec;
       position: relative;
       overflow: hidden;
+      cursor: pointer;
     }
 
     .contenedor-foto img {
@@ -324,27 +325,49 @@
       background-color: #20bd5a;
     }
 
-    .notificacion-copiado {
+    /* ESTILOS PARA VER FOTO EN PANTALLA COMPLETA */
+    .modal-imagen {
+      display: none;
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: var(--rosa-texto);
-      color: #ffffff;
-      padding: 12px 20px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      box-shadow: var(--sombra-hover);
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      z-index: 1000;
+      z-index: 2000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(5px);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
+      animation: fadeIn 0.3s ease;
     }
 
-    .notificacion-copiado.activa {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(-5px);
+    .modal-imagen.activo {
+      display: flex;
+    }
+
+    .modal-contenido {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      object-fit: contain;
+    }
+
+    .modal-cerrar {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      color: #ffffff;
+      font-size: 2.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .modal-cerrar:hover {
+      color: var(--rosa-pastel-medio);
     }
 
     .seccion-oculta {
@@ -455,16 +478,16 @@
         <h2 class="titulo-seccion">🌹 Rosas Eternas</h2>
       </div>
       <div class="galeria-grid">
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/rosa1.jpg" alt="Rosas"></div><div class="info-producto"><h3>Ramo Rosa Pastel</h3><p>Rosas satinadas hechas a mano.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/rosa2.jpg" alt="Rosas"></div><div class="info-producto"><h3>Ramo Rojo Clásico</h3><p>Detalles en cinta de alta calidad.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/rosa3.jpg" alt="Rosas"></div><div class="info-producto"><h3>Cúpula con Rosa</h3><p>Estilo flor eterna protegida.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/rosa4.jpg" alt="Rosas"></div><div class="info-producto"><h3>Arreglo Mixto</h3><p>Combinación de tonos suaves.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/rosa5.jpg" alt="Rosas"></div><div class="info-producto"><h3>Ramo Azul Real</h3><p>Diseño brillante personalizado.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/rosa6.jpg" alt="Rosas"></div><div class="info-producto"><h3>Rosas con Luces LED</h3><p>Detalle luminoso para regalo.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/rosa7.jpg" alt="Rosas"></div><div class="info-producto"><h3>Caja Corazón</h3><p>Arreglo floral en caja especial.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/rosa8.jpg" alt="Rosas"></div><div class="info-producto"><h3>Ramo Blanco Puro</h3><p>Elegancia en listón de seda.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/rosa9.jpg" alt="Rosas"></div><div class="info-producto"><h3>Mini Ramo Individual</h3><p>Un detalle delicado y único.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/rosa10.jpg" alt="Rosas"></div><div class="info-producto"><h3>Ramo Gigante</h3><p>Creación de gran tamaño hecha a pedido.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/rosa1.jpg')"><img src="img/rosa1.jpg" alt="Rosas"></div><div class="info-producto"><h3>Ramo Rosa Pastel</h3><p>Rosas satinadas hechas a mano.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/rosa2.jpg')"><img src="img/rosa2.jpg" alt="Rosas"></div><div class="info-producto"><h3>Ramo Rojo Clásico</h3><p>Detalles en cinta de alta calidad.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/rosa3.jpg')"><img src="img/rosa3.jpg" alt="Rosas"></div><div class="info-producto"><h3>Cúpula con Rosa</h3><p>Estilo flor eterna protegida.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/rosa4.jpg')"><img src="img/rosa4.jpg" alt="Rosas"></div><div class="info-producto"><h3>Arreglo Mixto</h3><p>Combinación de tonos suaves.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/rosa5.jpg')"><img src="img/rosa5.jpg" alt="Rosas"></div><div class="info-producto"><h3>Ramo Azul Real</h3><p>Diseño brillante personalizado.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/rosa6.jpg')"><img src="img/rosa6.jpg" alt="Rosas"></div><div class="info-producto"><h3>Rosas con Luces LED</h3><p>Detalle luminoso para regalo.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/rosa7.jpg')"><img src="img/rosa7.jpg" alt="Rosas"></div><div class="info-producto"><h3>Caja Corazón</h3><p>Arreglo floral en caja especial.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/rosa8.jpg')"><img src="img/rosa8.jpg" alt="Rosas"></div><div class="info-producto"><h3>Ramo Blanco Puro</h3><p>Elegancia en listón de seda.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/rosa9.jpg')"><img src="img/rosa9.jpg" alt="Rosas"></div><div class="info-producto"><h3>Mini Ramo Individual</h3><p>Un detalle delicado y único.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/rosa10.jpg')"><img src="img/rosa10.jpg" alt="Rosas"></div><div class="info-producto"><h3>Ramo Gigante</h3><p>Creación de gran tamaño hecha a pedido.</p></div></div>
       </div>
     </section>
 
@@ -475,16 +498,16 @@
         <h2 class="titulo-seccion">📚 Libros</h2>
       </div>
       <div class="galeria-grid">
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/libro1.jpg" alt="Libro"></div><div class="info-producto"><h3>Libro de Recuerdos</h3><p>Álbum empastado para fotos y notas.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/libro2.jpg" alt="Libro"></div><div class="info-producto"><h3>Recetario Artesanal</h3><p>Diseño especial para la cocina.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/libro3.jpg" alt="Libro"></div><div class="info-producto"><h3>Libro de Firmas</h3><p>Ideal para eventos y bodas.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/libro4.jpg" alt="Libro"></div><div class="info-producto"><h3>Cuaderno de Bocetos</h3><p>Hojas de alto gramaje para dibujo.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/libro5.jpg" alt="Libro"></div><div class="info-producto"><h3>Diario Personal con Broche</h3><p>Cubierta rígida hecha a mano.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/libro6.jpg" alt="Libro"></div><div class="info-producto"><h3>Libro de Bebé</h3><p>Para registrar momentos especiales.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/libro7.jpg" alt="Libro"></div><div class="info-producto"><h3>Libro de Agradecimientos</h3><p>Tapa dura personalizada.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/libro8.jpg" alt="Libro"></div><div class="info-producto"><h3>Libro Temático Vintage</h3><p>Estilo antiguo empastado en tela.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/libro9.jpg" alt="Libro"></div><div class="info-producto"><h3>Álbum Fotográfico Ilustrado</h3><p>Hojas gruesas para montar recuerdos.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/libro10.jpg" alt="Libro"></div><div class="info-producto"><h3>Bitácora de Viajes</h3><p>Diseño compacto con mapa.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/libro1.jpg')"><img src="img/libro1.jpg" alt="Libro"></div><div class="info-producto"><h3>Libro de Recuerdos</h3><p>Álbum empastado para fotos y notas.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/libro2.jpg')"><img src="img/libro2.jpg" alt="Libro"></div><div class="info-producto"><h3>Recetario Artesanal</h3><p>Diseño especial para la cocina.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/libro3.jpg')"><img src="img/libro3.jpg" alt="Libro"></div><div class="info-producto"><h3>Libro de Firmas</h3><p>Ideal para eventos y bodas.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/libro4.jpg')"><img src="img/libro4.jpg" alt="Libro"></div><div class="info-producto"><h3>Cuaderno de Bocetos</h3><p>Hojas de alto gramaje para dibujo.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/libro5.jpg')"><img src="img/libro5.jpg" alt="Libro"></div><div class="info-producto"><h3>Diario Personal con Broche</h3><p>Cubierta rígida hecha a mano.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/libro6.jpg')"><img src="img/libro6.jpg" alt="Libro"></div><div class="info-producto"><h3>Libro de Bebé</h3><p>Para registrar momentos especiales.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/libro7.jpg')"><img src="img/libro7.jpg" alt="Libro"></div><div class="info-producto"><h3>Libro de Agradecimientos</h3><p>Tapa dura personalizada.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/libro8.jpg')"><img src="img/libro8.jpg" alt="Libro"></div><div class="info-producto"><h3>Libro Temático Vintage</h3><p>Estilo antiguo empastado en tela.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/libro9.jpg')"><img src="img/libro9.jpg" alt="Libro"></div><div class="info-producto"><h3>Álbum Fotográfico Ilustrado</h3><p>Hojas gruesas para montar recuerdos.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/libro10.jpg')"><img src="img/libro10.jpg" alt="Libro"></div><div class="info-producto"><h3>Bitácora de Viajes</h3><p>Diseño compacto con mapa.</p></div></div>
       </div>
     </section>
 
@@ -495,16 +518,16 @@
         <h2 class="titulo-seccion">🗓️ Agendas</h2>
       </div>
       <div class="galeria-grid">
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/agenda1.jpg" alt="Agenda"></div><div class="info-producto"><h3>Agenda Floral</h3><p>Empastado artesanal con flores.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/agenda2.jpg" alt="Agenda"></div><div class="info-producto"><h3>Libreta de Apuntes</h3><p>Hojas decoradas hechas a mano.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/agenda3.jpg" alt="Agenda"></div><div class="info-producto"><h3>Planner Semanal</h3><p>Organizador en tapa dura.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/agenda4.jpg" alt="Agenda"></div><div class="info-producto"><h3>Agenda Ejecutiva</h3><p>Acabados elegantes y delicados.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/agenda5.jpg" alt="Agenda"></div><div class="info-producto"><h3>Libreta Pocket</h3><p>Tamaño compacto para el bolso.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/agenda6.jpg" alt="Agenda"></div><div class="info-producto"><h3>Agenda Tema Ilustrado</h3><p>Tapa personalizada a pedido.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/agenda7.jpg" alt="Agenda"></div><div class="info-producto"><h3>Planner Mensual Docente</h3><p>Formato especial de organización.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/agenda8.jpg" alt="Agenda"></div><div class="info-producto"><h3>Agenda Perpetua</h3><p>Sin fechas fijas para usar cuando quieras.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/agenda9.jpg" alt="Agenda"></div><div class="info-producto"><h3>Planner de Finanzas</h3><p>Secciones para control de gastos.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/agenda10.jpg" alt="Agenda"></div><div class="info-producto"><h3>Agenda Minimalista Rosa</h3><p>Diseño limpio y portada suave.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/agenda1.jpg')"><img src="img/agenda1.jpg" alt="Agenda"></div><div class="info-producto"><h3>Agenda Floral</h3><p>Empastado artesanal con flores.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/agenda2.jpg')"><img src="img/agenda2.jpg" alt="Agenda"></div><div class="info-producto"><h3>Libreta de Apuntes</h3><p>Hojas decoradas hechas a mano.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/agenda3.jpg')"><img src="img/agenda3.jpg" alt="Agenda"></div><div class="info-producto"><h3>Planner Semanal</h3><p>Organizador en tapa dura.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/agenda4.jpg')"><img src="img/agenda4.jpg" alt="Agenda"></div><div class="info-producto"><h3>Agenda Ejecutiva</h3><p>Acabados elegantes y delicados.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/agenda5.jpg')"><img src="img/agenda5.jpg" alt="Agenda"></div><div class="info-producto"><h3>Libreta Pocket</h3><p>Tamaño compacto para el bolso.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/agenda6.jpg')"><img src="img/agenda6.jpg" alt="Agenda"></div><div class="info-producto"><h3>Agenda Tema Ilustrado</h3><p>Tapa personalizada a pedido.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/agenda7.jpg')"><img src="img/agenda7.jpg" alt="Agenda"></div><div class="info-producto"><h3>Planner Mensual Docente</h3><p>Formato especial de organización.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/agenda8.jpg')"><img src="img/agenda8.jpg" alt="Agenda"></div><div class="info-producto"><h3>Agenda Perpetua</h3><p>Sin fechas fijas para usar cuando quieras.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/agenda9.jpg')"><img src="img/agenda9.jpg" alt="Agenda"></div><div class="info-producto"><h3>Planner de Finanzas</h3><p>Secciones para control de gastos.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/agenda10.jpg')"><img src="img/agenda10.jpg" alt="Agenda"></div><div class="info-producto"><h3>Agenda Minimalista Rosa</h3><p>Diseño limpio y portada suave.</p></div></div>
       </div>
     </section>
 
@@ -515,16 +538,16 @@
         <h2 class="titulo-seccion">🖼️ Cuadros</h2>
       </div>
       <div class="galeria-grid">
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/cuadro1.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Cuadro Familiar</h3><p>Foto impresa en alta calidad con marco.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/cuadro2.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Marco con Luces</h3><p>Cuadro decorado con tira LED.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/cuadro3.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Cuadro 3D</h3><p>Efecto de profundidad con capas.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/cuadro4.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Cuadro Frase Motivacional</h3><p>Tipografía elegante impresa.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/cuadro5.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Set de Mini Cuadros</h3><p>Trío de marquitos combinados.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/cuadro6.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Cuadro con Flores Secas</h3><p>Decoración mixta foto y naturaleza.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/cuadro7.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Cuadro Sombra Infantil</h3><p>Diseño con volumen para habitación.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/cuadro8.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Cuadro con Canción y Código</h3><p>Estilo reproductor musical.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/cuadro9.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Marco Rustico Madera</h3><p>Acabado natural para decoración.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/cuadro10.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Cuadro Pareja Aniversario</h3><p>Diseño con fechas especiales.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/cuadro1.jpg')"><img src="img/cuadro1.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Cuadro Familiar</h3><p>Foto impresa en alta calidad con marco.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/cuadro2.jpg')"><img src="img/cuadro2.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Marco con Luces</h3><p>Cuadro decorado con tira LED.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/cuadro3.jpg')"><img src="img/cuadro3.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Cuadro 3D</h3><p>Efecto de profundidad con capas.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/cuadro4.jpg')"><img src="img/cuadro4.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Cuadro Frase Motivacional</h3><p>Tipografía elegante impresa.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/cuadro5.jpg')"><img src="img/cuadro5.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Set de Mini Cuadros</h3><p>Trío de marquitos combinados.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/cuadro6.jpg')"><img src="img/cuadro6.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Cuadro con Flores Secas</h3><p>Decoración mixta foto y naturaleza.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/cuadro7.jpg')"><img src="img/cuadro7.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Cuadro Sombra Infantil</h3><p>Diseño con volumen para habitación.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/cuadro8.jpg')"><img src="img/cuadro8.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Cuadro con Canción y Código</h3><p>Estilo reproductor musical.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/cuadro9.jpg')"><img src="img/cuadro9.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Marco Rustico Madera</h3><p>Acabado natural para decoración.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/cuadro10.jpg')"><img src="img/cuadro10.jpg" alt="Cuadro"></div><div class="info-producto"><h3>Cuadro Pareja Aniversario</h3><p>Diseño con fechas especiales.</p></div></div>
       </div>
     </section>
 
@@ -535,16 +558,16 @@
         <h2 class="titulo-seccion">📷 Fotos</h2>
       </div>
       <div class="galeria-grid">
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/foto1.jpg" alt="Fotos"></div><div class="info-producto"><h3>Foto Polaroide Gigante</h3><p>Estilo retro con mensaje impreso.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/foto2.jpg" alt="Fotos"></div><div class="info-producto"><h3>Collage de Fotos</h3><p>Mosaico de recuerdos especiales.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/foto3.jpg" alt="Fotos"></div><div class="info-producto"><h3>Retrato Personalizado</h3><p>Acabado mate de alta definición.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/foto4.jpg" alt="Fotos"></div><div class="info-producto"><h3>Portafoto de Mesa</h3><p>Marco de escritorio hecho a mano.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/foto5.jpg" alt="Fotos"></div><div class="info-producto"><h3>Tira de Fotos Tipo Cabina</h3><p>Set de fotos verticales con fondo.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/foto6.jpg" alt="Fotos"></div><div class="info-producto"><h3>Mini Fotos Magneticas</h3><p>Ideales para el refrigerador.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/foto7.jpg" alt="Fotos"></div><div class="info-producto"><h3>Foto en Bloque Acrílico</h3><p>Efecto cristal brillante.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/foto8.jpg" alt="Fotos"></div><div class="info-producto"><h3>Caja con Galería de Fotos</h3><p>Fotos desplegables sorpresa.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/foto9.jpg" alt="Fotos"></div><div class="info-producto"><h3>Guirnalda con Fotos</h3><p>Fotos impresas con broches de madera.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/foto10.jpg" alt="Fotos"></div><div class="info-producto"><h3>Foto Impresa con Filtro Suave</h3><p>Acabado pastel especial.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/foto1.jpg')"><img src="img/foto1.jpg" alt="Fotos"></div><div class="info-producto"><h3>Foto Polaroide Gigante</h3><p>Estilo retro con mensaje impreso.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/foto2.jpg')"><img src="img/foto2.jpg" alt="Fotos"></div><div class="info-producto"><h3>Collage de Fotos</h3><p>Mosaico de recuerdos especiales.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/foto3.jpg')"><img src="img/foto3.jpg" alt="Fotos"></div><div class="info-producto"><h3>Retrato Personalizado</h3><p>Acabado mate de alta definición.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/foto4.jpg')"><img src="img/foto4.jpg" alt="Fotos"></div><div class="info-producto"><h3>Portafoto de Mesa</h3><p>Marco de escritorio hecho a mano.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/foto5.jpg')"><img src="img/foto5.jpg" alt="Fotos"></div><div class="info-producto"><h3>Tira de Fotos Tipo Cabina</h3><p>Set de fotos verticales con fondo.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/foto6.jpg')"><img src="img/foto6.jpg" alt="Fotos"></div><div class="info-producto"><h3>Mini Fotos Magneticas</h3><p>Ideales para el refrigerador.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/foto7.jpg')"><img src="img/foto7.jpg" alt="Fotos"></div><div class="info-producto"><h3>Foto en Bloque Acrílico</h3><p>Efecto cristal brillante.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/foto8.jpg')"><img src="img/foto8.jpg" alt="Fotos"></div><div class="info-producto"><h3>Caja con Galería de Fotos</h3><p>Fotos desplegables sorpresa.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/foto9.jpg')"><img src="img/foto9.jpg" alt="Fotos"></div><div class="info-producto"><h3>Guirnalda con Fotos</h3><p>Fotos impresas con broches de madera.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/foto10.jpg')"><img src="img/foto10.jpg" alt="Fotos"></div><div class="info-producto"><h3>Foto Impresa con Filtro Suave</h3><p>Acabado pastel especial.</p></div></div>
       </div>
     </section>
 
@@ -555,16 +578,16 @@
         <h2 class="titulo-seccion">✨ Stickers</h2>
       </div>
       <div class="galeria-grid">
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/sticker1.jpg" alt="Stickers"></div><div class="info-producto"><h3>Pack Stickers Florales</h3><p>Vinilo resistente al agua.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/sticker2.jpg" alt="Stickers"></div><div class="info-producto"><h3>Stickers Holográficos</h3><p>Brillo y reflejos de colores.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/sticker3.jpg" alt="Stickers"></div><div class="info-producto"><h3>Pack Frases Bonitas</h3><p>Ideales para cuadernos y termos.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/sticker4.jpg" alt="Stickers"></div><div class="info-producto"><h3>Stickers Ilustrados</h3><p>Dibujos exclusivos impresos.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/sticker5.jpg" alt="Stickers"></div><div class="info-producto"><h3>Set de Mini Stickers</h3><p>Variedad de tamaños pequeñitos.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/sticker6.jpg" alt="Stickers"></div><div class="info-producto"><h3>Stickers Mate Personalizados</h3><p>Acabado suave al tacto.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/sticker7.jpg" alt="Stickers"></div><div class="info-producto"><h3>Stickers Transparentes</h3><p>Ideal para superficies de vidrio.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/sticker8.jpg" alt="Stickers"></div><div class="info-producto"><h3>Pack Temático Infantil</h3><p>Diseños variados a color.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/sticker9.jpg" alt="Stickers"></div><div class="info-producto"><h3>Stickers con Relieve / Glow</h3><p>Efecto textura en acabado.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/sticker10.jpg" alt="Stickers"></div><div class="info-producto"><h3>Plancha de Stickers Troquelada</h3><p>Variedad en una sola lámina.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/sticker1.jpg')"><img src="img/sticker1.jpg" alt="Stickers"></div><div class="info-producto"><h3>Pack Stickers Florales</h3><p>Vinilo resistente al agua.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/sticker2.jpg')"><img src="img/sticker2.jpg" alt="Stickers"></div><div class="info-producto"><h3>Stickers Holográficos</h3><p>Brillo y reflejos de colores.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/sticker3.jpg')"><img src="img/sticker3.jpg" alt="Stickers"></div><div class="info-producto"><h3>Pack Frases Bonitas</h3><p>Ideales para cuadernos y termos.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/sticker4.jpg')"><img src="img/sticker4.jpg" alt="Stickers"></div><div class="info-producto"><h3>Stickers Ilustrados</h3><p>Dibujos exclusivos impresos.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/sticker5.jpg')"><img src="img/sticker5.jpg" alt="Stickers"></div><div class="info-producto"><h3>Set de Mini Stickers</h3><p>Variedad de tamaños pequeñitos.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/sticker6.jpg')"><img src="img/sticker6.jpg" alt="Stickers"></div><div class="info-producto"><h3>Stickers Mate Personalizados</h3><p>Acabado suave al tacto.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/sticker7.jpg')"><img src="img/sticker7.jpg" alt="Stickers"></div><div class="info-producto"><h3>Stickers Transparentes</h3><p>Ideal para superficies de vidrio.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/sticker8.jpg')"><img src="img/sticker8.jpg" alt="Stickers"></div><div class="info-producto"><h3>Pack Temático Infantil</h3><p>Diseños variados a color.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/sticker9.jpg')"><img src="img/sticker9.jpg" alt="Stickers"></div><div class="info-producto"><h3>Stickers con Relieve / Glow</h3><p>Efecto textura en acabado.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/sticker10.jpg')"><img src="img/sticker10.jpg" alt="Stickers"></div><div class="info-producto"><h3>Plancha de Stickers Troquelada</h3><p>Variedad en una sola lámina.</p></div></div>
       </div>
     </section>
 
@@ -575,16 +598,16 @@
         <h2 class="titulo-seccion">🔑 Llaveros</h2>
       </div>
       <div class="galeria-grid">
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/llavero1.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero en Resina</h3><p>Con inicial y detalles dorados.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/llavero2.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero de Tela / Cinta</h3><p>Confección suave con dije.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/llavero3.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero Personalizado Foto</h3><p>Imagen miniaturizada protegida.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/llavero4.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero Parejas</h3><p>Duo de llaveros complementarios.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/llavero5.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero Tejido</h3><p>Detalle a crochet o macramé.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/llavero6.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero de Acrílico</h3><p>Corte limpio con nombre impreso.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/llavero7.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero Metalizado</h3><p>Estructura rígida brillante.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/llavero8.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero Pompon Suave</h3><p>Accesorio suave decorativo.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/llavero9.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero con Canción</h3><p>Código escaneable impreso.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/llavero10.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero Cuero Sintético</h3><p>Grabado delicado con nombre.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/llavero1.jpg')"><img src="img/llavero1.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero en Resina</h3><p>Con inicial y detalles dorados.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/llavero2.jpg')"><img src="img/llavero2.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero de Tela / Cinta</h3><p>Confección suave con dije.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/llavero3.jpg')"><img src="img/llavero3.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero Personalizado Foto</h3><p>Imagen miniaturizada protegida.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/llavero4.jpg')"><img src="img/llavero4.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero Parejas</h3><p>Duo de llaveros complementarios.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/llavero5.jpg')"><img src="img/llavero5.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero Tejido</h3><p>Detalle a crochet o macramé.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/llavero6.jpg')"><img src="img/llavero6.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero de Acrílico</h3><p>Corte limpio con nombre impreso.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/llavero7.jpg')"><img src="img/llavero7.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero Metalizado</h3><p>Estructura rígida brillante.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/llavero8.jpg')"><img src="img/llavero8.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero Pompon Suave</h3><p>Accesorio suave decorativo.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/llavero9.jpg')"><img src="img/llavero9.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero con Canción</h3><p>Código escaneable impreso.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/llavero10.jpg')"><img src="img/llavero10.jpg" alt="Llavero"></div><div class="info-producto"><h3>Llavero Cuero Sintético</h3><p>Grabado delicado con nombre.</p></div></div>
       </div>
     </section>
 
@@ -595,16 +618,16 @@
         <h2 class="titulo-seccion">🔘 Chapitas</h2>
       </div>
       <div class="galeria-grid">
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/chapita1.jpg" alt="Chapitas"></div><div class="info-producto"><h3>Chapita Prendedor Clásica</h3><p>Ideal para mochilas y prendas.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/chapita2.jpg" alt="Chapitas"></div><div class="info-producto"><h3>Chapita Destapador</h3><p>Llavero destapador multifunción.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/chapita3.jpg" alt="Chapitas"></div><div class="info-producto"><h3>Chapita Magnética</h3><p>Imán para refrigerador impreso.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/chapita4.jpg" alt="Chapitas"></div><div class="info-producto"><h3>Chapita con Espejo</h3><p>Espejo compacto de bolsillo.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/chapita5.jpg" alt="Chapitas"></div><div class="info-producto"><h3>Chapita Evento / Cumpleaños</h3><p>Diseño especial para recuerdos.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/chapita6.jpg" alt="Chapitas"></div><div class="info-producto"><h3>Pack Chapitas Medianas</h3><p>Set de varios diseños combinados.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/chapita7.jpg" alt="Chapitas"></div><div class="info-producto"><h3>Chapita Holográfica</h3><p>Laminado brillante especial.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/chapita8.jpg" alt="Chapitas"></div><div class="info-producto"><h3>Chapita Mate</h3><p>Acabado antirreflejo suave.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/chapita9.jpg" alt="Chapitas"></div><div class="info-producto"><h3>Chapita Identificatoria</h3><p>Con nombre para eventos.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/chapita10.jpg" alt="Chapitas"></div><div class="info-producto"><h3>Chapita Mini Lote</h3><p>Pedidos personalizados en volumen.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/chapita1.jpg')"><img src="img/chapita1.jpg" alt="Chapitas"></div><div class="info-producto"><h3>Chapita Prendedor Clásica</h3><p>Ideal para mochilas y prendas.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/chapita2.jpg')"><img src="img/chapita2.jpg" alt="Chapitas"></div><div class="info-producto"><h3>Chapita Destapador</h3><p>Llavero destapador multifunción.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/chapita3.jpg')"><img src="img/chapita3.jpg" alt="Chapitas"></div><div class="info-producto"><h3>Chapita Magnética</h3><p>Imán para refrigerador impreso.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/chapita4.jpg')"><img src="img/chapita4.jpg" alt="Chapitas"></div><div class="info-producto"><h3>Chapita con Espejo</h3><p>Espejo compacto de bolsillo.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/chapita5.jpg')"><img src="img/chapita5.jpg" alt="Chapitas"></div><div class="info-producto"><h3>Chapita Evento / Cumpleaños</h3><p>Diseño especial para recuerdos.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/chapita6.jpg')"><img src="img/chapita6.jpg" alt="Chapitas"></div><div class="info-producto"><h3>Pack Chapitas Medianas</h3><p>Set de varios diseños combinados.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/chapita7.jpg')"><img src="img/chapita7.jpg" alt="Chapitas"></div><div class="info-producto"><h3>Chapita Holográfica</h3><p>Laminado brillante especial.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/chapita8.jpg')"><img src="img/chapita8.jpg" alt="Chapitas"></div><div class="info-producto"><h3>Chapita Mate</h3><p>Acabado antirreflejo suave.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/chapita9.jpg')"><img src="img/chapita9.jpg" alt="Chapitas"></div><div class="info-producto"><h3>Chapita Identificatoria</h3><p>Con nombre para eventos.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/chapita10.jpg')"><img src="img/chapita10.jpg" alt="Chapitas"></div><div class="info-producto"><h3>Chapita Mini Lote</h3><p>Pedidos personalizados en volumen.</p></div></div>
       </div>
     </section>
 
@@ -615,16 +638,16 @@
         <h2 class="titulo-seccion">🎨 Manualidades Variadas</h2>
       </div>
       <div class="galeria-grid">
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/manualidad1.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Caja Sorpresa</h3><p>Caja desplegable con recuerdos.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/manualidad2.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Adorno Colgante</h3><p>Decoración para pared o puerta.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/manualidad3.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Tarjeta 3D Pop-up</h3><p>Tarjeta desplegable hecha a mano.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/manualidad4.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Detalle de Mesa</h3><p>Centro de mesa decorativo.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/manualidad5.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Bolsa de Regalo Pintada</h3><p>Diseño exclusivo pintado a mano.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/manualidad6.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Arreglo Dulce</h3><p>Decoración especial para festejos.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/manualidad7.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Portavelas Artesanal</h3><p>Detalle cálido para el hogar.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/manualidad8.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Topper para Pastel</h3><p>Decoración personalizada para tortas.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/manualidad9.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Banderines Temáticos</h3><p>Decoración en papel y tela.</p></div></div>
-        <div class="tarjeta-producto"><div class="contenedor-foto"><img src="img/manualidad10.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Recuerdo Evento Especial</h3><p>Detalles hechos en lote a pedido.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/manualidad1.jpg')"><img src="img/manualidad1.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Caja Sorpresa</h3><p>Caja desplegable con recuerdos.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/manualidad2.jpg')"><img src="img/manualidad2.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Adorno Colgante</h3><p>Decoración para pared o puerta.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/manualidad3.jpg')"><img src="img/manualidad3.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Tarjeta 3D Pop-up</h3><p>Tarjeta desplegable hecha a mano.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/manualidad4.jpg')"><img src="img/manualidad4.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Detalle de Mesa</h3><p>Centro de mesa decorativo.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/manualidad5.jpg')"><img src="img/manualidad5.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Bolsa de Regalo Pintada</h3><p>Diseño exclusivo pintado a mano.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/manualidad6.jpg')"><img src="img/manualidad6.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Arreglo Dulce</h3><p>Decoración especial para festejos.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/manualidad7.jpg')"><img src="img/manualidad7.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Portavelas Artesanal</h3><p>Detalle cálido para el hogar.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/manualidad8.jpg')"><img src="img/manualidad8.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Topper para Pastel</h3><p>Decoración personalizada para tortas.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/manualidad9.jpg')"><img src="img/manualidad9.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Banderines Temáticos</h3><p>Decoración en papel y tela.</p></div></div>
+        <div class="tarjeta-producto"><div class="contenedor-foto" onclick="abrirFotoGrande('img/manualidad10.jpg')"><img src="img/manualidad10.jpg" alt="Manualidad"></div><div class="info-producto"><h3>Recuerdo Evento Especial</h3><p>Detalles hechos en lote a pedido.</p></div></div>
       </div>
     </section>
 
@@ -633,20 +656,25 @@
   <!-- PIE DE PÁGINA -->
   <footer>
     <h4>¿Quieres contactarte con nosotros?</h4>
-    <p class="texto-footer">Escríbenos directamente o copia nuestro correo para cualquier consulta.</p>
+    <p class="texto-footer">Escríbenos por WhatsApp o envíanos un correo directo.</p>
 
     <div class="contenedor-contacto">
-      <!-- NÚMERO ACTUALIZADO CON ENLACE DIRECTO A WHATSAPP -->
       <a href="https://wa.me/56948519002?text=¡Hola!%20Vi%20tu%20catálogo%20web%20y%20me%20gustaron%20tus%20creaciones." target="_blank" class="item-contacto btn-whatsapp-footer">
         💬 WhatsApp (+56 9 4851 9002)
       </a>
-      <div class="item-contacto" onclick="copiarCorreo('contacto@gyacreaciones.cl')">
-        ✉️ <span id="texto-correo">contacto@gyacreaciones.cl</span>
-      </div>
+
+      <!-- ENLACE MODIFICADO PARA QUE ABRA DIRECTAMENTE EN GMAIL EN LA WEB -->
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=pardodanny60@gmail.com&su=Consulta%20desde%20el%20Cat%C3%A1logo%20Web&body=%C2%A1Hola!%20Vi%20tu%20cat%C3%A1logo%20web%20y%20me%20gustar%C3%ADa%20hacer%20una%20consulta." target="_blank" class="item-contacto">
+        ✉️ pardodanny60@gmail.com
+      </a>
     </div>
   </footer>
 
-  <div id="notificacion" class="notificacion-copiado">¡Correo copiado al portapapeles! 📋</div>
+  <!-- MODAL PARA VER IMÁGENES EN GRANDE -->
+  <div id="modal-foto" class="modal-imagen" onclick="cerrarFotoGrande()">
+    <span class="modal-cerrar" onclick="cerrarFotoGrande()">&times;</span>
+    <img id="img-modal-ampliada" class="modal-contenido" src="" alt="Vista ampliada">
+  </div>
 
   <script>
     function mostrarSeccion(idSeccion) {
@@ -668,14 +696,17 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function copiarCorreo(correo) {
-      navigator.clipboard.writeText(correo).then(() => {
-        const notif = document.getElementById('notificacion');
-        notif.classList.add('activa');
-        setTimeout(() => {
-          notif.classList.remove('activa');
-        }, 2500);
-      });
+    /* FUNCIONES PARA AGRANDAR Y CERRAR FOTOS */
+    function abrirFotoGrande(rutaImagen) {
+      const modal = document.getElementById('modal-foto');
+      const imagenModal = document.getElementById('img-modal-ampliada');
+      imagenModal.src = rutaImagen;
+      modal.classList.add('activo');
+    }
+
+    function cerrarFotoGrande() {
+      const modal = document.getElementById('modal-foto');
+      modal.classList.remove('activo');
     }
   </script>
 </body>
